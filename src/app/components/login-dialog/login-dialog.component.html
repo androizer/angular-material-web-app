@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Login</h2>
+<mat-dialog-content class="mat-typography">
+  <form novalidate #form="ngForm" style="display:flex; flex-direction: column;">
+    <mat-form-field appearance="outline" hintLabel="Min: {{state.userMinLength}}, Max: {{state.userMaxLength}}">
+      <mat-label>Username</mat-label>
+      <input
+      type="text"
+      matInput
+      [(ngModel)]="loginDetails.userName"
+      #userName="ngModel"
+      name="userName"
+      [minlength]="state.userMinLength"
+      [maxlength]="state.userMaxLength"
+      required
+      >
+      <mat-hint align="end">{{userName.value?.length || 0}}/{{state.userMaxLength}}</mat-hint>
+      <mat-error *ngIf="userName.errors?.required && userName.touched">You must enter the username</mat-error>
+      <mat-error *ngIf="userName.errors?.minlength && userName.touched">Less than {{state.userMinLength}} characters not allowed</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline" hintLabel="Min: {{state.pwdMinLength}}, Max: {{state.pwdMaxLength}}">
+      <mat-label>Password</mat-label>
+      <input
+      type="password"
+      matInput
+      [(ngModel)]="loginDetails.password"
+      #password="ngModel"
+      name="password"
+      [minlength]="state.pwdMinLength"
+      [maxlength]="state.pwdMaxLength"
+      required
+      >
+      <mat-hint align="end">{{password.value?.length || 0}}/{{state.pwdMaxLength}}</mat-hint>
+      <mat-error *ngIf="password.errors?.required && password.touched">You must enter the password</mat-error>
+      <mat-error *ngIf="password.errors?.minlength && password.touched">Less than {{state.pwdMinLength}} characters not allowed</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [disabled]="!form.valid" [mat-dialog-close]="form.value">Lemme Be In!</button>
+</mat-dialog-actions>

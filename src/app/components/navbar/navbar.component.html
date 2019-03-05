@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" 
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      >
+    <mat-toolbar>Angular Web App</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="javascript:void(0)" (click)="openLoginDialog()">{{!this.state.loginStatus ? 'Login' : 'Logout'}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z6">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <h4>Welcome Guest</h4>
+      <span style="flex: 1 1 auto;"></span>
+      <button
+        *ngIf="!(isHandset$ | async) && this.state.loginStatus"
+        mat-flat-button
+        color="primary"
+      >
+      Profile
+      </button>
+      <button
+        *ngIf="!(isHandset$ | async)"
+        mat-flat-button
+        color="primary"
+        (click)="openLoginDialog()"
+        [innerHTML]="!this.state.loginStatus ? 'Login' : 'Logout'"
+      >
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

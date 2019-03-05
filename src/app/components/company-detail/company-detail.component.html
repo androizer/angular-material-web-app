@@ -1,0 +1,17 @@
+<div #carousel class="carousel carousel-slider center" style="max-width: 500px; min-height: 600px">
+  <div class="carousel-item" *ngFor="let company of companyData">
+    <mat-card style="min-height: 100%;">
+      <mat-card-header>
+        <mat-card-title>{{company.name}}</mat-card-title>
+        <mat-card-subtitle>{{company.ceo}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="company.avatar" alt="{{company.ceo}}.jpeg">
+      <mat-card-content>
+        <p>{{company.extract}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent">Like</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
